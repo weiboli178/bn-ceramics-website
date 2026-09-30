@@ -24,7 +24,7 @@ const copy = {
     collectionLabel: 'The 2026 daily stock', collectionTitle: 'A MATERIAL LANGUAGE, SET IN MOTION.', collectionText: 'A selection from the current BN Daily Stock book. Every surface shown here links directly to its original product page.', selectedTile: 'Selected tile', viewInBook: 'View in catalogue', seeAll: 'Open the full catalogue',
     catalogueLabel: '28-page product book', catalogueTitle: 'EVERY PATTERN. ONE CATALOGUE.', catalogueText: 'Explore the current designs, sizes and article codes in the BN Daily Stock product book.', catalogueAction: 'Open PDF catalogue', catalogueMeta: '28 pages · product codes · sizes',
     companyLabel: 'A considered material partner', companyTitle: 'MADE FOR THE SPACES PEOPLE RETURN TO.', companyText: 'BN Ceramics produces wall tiles, floor tiles and polished collections for residential, commercial and project applications in Nigeria.', statOne: 'Wall & decorative tiles', statTwo: 'Floor tile collections', statThree: 'Polished tile series',
-    contactLabel: 'Visit or get in touch', contactTitle: 'START WITH THE RIGHT SURFACE.', contactText: 'For catalogue access, availability and business enquiries, contact the BN Ceramics team.', addressTitle: 'BN Ceramics Industry Nigeria Limited', socialLabel: 'Social channels', tiktok: 'TikTok QR', facebook: 'Facebook QR', placeholderTag: 'TO BE UPDATED', logoTag: 'LOGO PLACEHOLDER', footer: 'Ceramic surfaces for modern spaces.',
+    contactLabel: 'Visit or get in touch', contactTitle: 'START WITH THE RIGHT SURFACE.', contactText: 'For catalogue access, availability and business enquiries, contact the BN Ceramics team.', addressTitle: 'BN Ceramics Industry Nigeria Limited', socialLabel: 'Social channels', tiktok: 'TikTok QR', facebook: 'Facebook QR', placeholderTag: 'TO BE UPDATED', footer: 'Ceramic surfaces for modern spaces.',
   },
   zh: {
     navProducts: '产品系列', navCatalogue: '产品手册', navCompany: '公司', navContact: '联系', language: 'English',
@@ -33,12 +33,14 @@ const copy = {
     collectionLabel: '2026 现货产品', collectionTitle: '为项目构建完整的材质语言。', collectionText: '精选自当前 BN Daily Stock 产品手册。这里展示的每一款花色均可直接跳转至手册原页。', selectedTile: '精选产品', viewInBook: '在手册中查看', seeAll: '打开完整产品手册',
     catalogueLabel: '28 页产品手册', catalogueTitle: '全部花色，一本手册。', catalogueText: '在 BN Daily Stock 产品手册中查看现有的全部花色、规格与产品编号。', catalogueAction: '打开 PDF 手册', catalogueMeta: '28 页 · 产品编号 · 规格',
     companyLabel: '专业的材质伙伴', companyTitle: '为人们愿意反复回到的空间而打造。', companyText: 'BN Ceramics 在尼日利亚生产墙砖、地砖和抛光砖系列，适用于住宅、商业空间与工程项目。', statOne: '墙砖与装饰砖', statTwo: '地砖产品系列', statThree: '抛光砖系列',
-    contactLabel: '到访或联系', contactTitle: '从合适的表面材质开始。', contactText: '如需产品手册、库存信息或商务咨询，请联系 BN Ceramics 团队。', addressTitle: 'BN Ceramics Industry Nigeria Limited', socialLabel: '社交媒体', tiktok: 'TikTok 二维码', facebook: 'Facebook 二维码', placeholderTag: '待补充', logoTag: 'LOGO 待补充', footer: '为现代空间打造的陶瓷表面。',
+    contactLabel: '到访或联系', contactTitle: '从合适的表面材质开始。', contactText: '如需产品手册、库存信息或商务咨询，请联系 BN Ceramics 团队。', addressTitle: 'BN Ceramics Industry Nigeria Limited', socialLabel: '社交媒体', tiktok: 'TikTok 二维码', facebook: 'Facebook 二维码', placeholderTag: '待补充', footer: '为现代空间打造的陶瓷表面。',
   },
 }
 
 function BrandMark() {
-  return <svg className="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M10 9h10.5c5.2 0 8.3 2.5 8.3 6.8 0 2.4-1.2 4.2-3.3 5.2 3 .8 4.7 3.1 4.7 6.3 0 4.7-3.5 7.7-9.5 7.7H10V9Zm6 5v5.1h4.1c1.8 0 2.7-.9 2.7-2.6 0-1.7-.9-2.5-2.7-2.5H16Zm0 10v6h5c2 0 3.1-1 3.1-3s-1.1-3-3.1-3h-5Z" fill="currentColor"/><path d="M33 9h5v26h-5zM32 9h5.6L22.5 35h-5.6z" fill="currentColor"/></svg>
+  const bTiles = [[4, 4], [13, 4], [22, 4], [4, 13], [31, 13], [4, 22], [13, 22], [22, 22], [4, 31], [31, 31], [4, 40], [13, 40], [22, 40]]
+  const nTiles = [[57, 4], [93, 4], [57, 13], [66, 13], [93, 13], [57, 22], [75, 22], [93, 22], [57, 31], [84, 31], [93, 31], [57, 40], [93, 40]]
+  return <svg className="brand-mark" viewBox="0 0 106 48" role="img" aria-label="BN Ceramics logo">{bTiles.map(([x, y]) => <rect key={`b-${x}-${y}`} x={x} y={y} width="7" height="7" rx=".8" fill="currentColor" />)}{nTiles.map(([x, y]) => <rect key={`n-${x}-${y}`} x={x} y={y} width="7" height="7" rx=".8" fill="currentColor" />)}</svg>
 }
 
 function QrPlaceholder({ label, tag }: { label: string; tag: string }) {
@@ -54,7 +56,7 @@ function App() {
 
   return <main>
     <section id="top" className="hero" style={{ backgroundImage: `url("${assetUrl('images/bn-hero-lobby-v1.png')}")` }}>
-      <header className="nav-wrap"><a className="brand" href="#top" aria-label="BN Ceramics home"><BrandMark /><span>BN Ceramics<small>Nigeria Limited</small></span><b className="placeholder-chip brand-chip">{t.logoTag}</b></a><button className="menu-toggle" type="button" onClick={() => setMenuOpen((open) => !open)} aria-label="Toggle navigation">{menuOpen ? <X size={22} /> : <Menu size={22} />}</button><nav className={menuOpen ? 'nav open' : 'nav'}><a href="#collections" onClick={closeMenu}>{t.navProducts}</a><a href="#catalogue" onClick={closeMenu}>{t.navCatalogue}</a><a href="#company" onClick={closeMenu}>{t.navCompany}</a><a href="#contact" onClick={closeMenu}>{t.navContact}</a><button type="button" onClick={() => setLang(lang === 'en' ? 'zh' : 'en')}><Globe2 size={15} /> {t.language}</button></nav></header>
+      <header className="nav-wrap"><a className="brand" href="#top" aria-label="BN Ceramics home"><BrandMark /><span>BN Ceramics<small>Nigeria Limited</small></span></a><button className="menu-toggle" type="button" onClick={() => setMenuOpen((open) => !open)} aria-label="Toggle navigation">{menuOpen ? <X size={22} /> : <Menu size={22} />}</button><nav className={menuOpen ? 'nav open' : 'nav'}><a href="#collections" onClick={closeMenu}>{t.navProducts}</a><a href="#catalogue" onClick={closeMenu}>{t.navCatalogue}</a><a href="#company" onClick={closeMenu}>{t.navCompany}</a><a href="#contact" onClick={closeMenu}>{t.navContact}</a><button type="button" onClick={() => setLang(lang === 'en' ? 'zh' : 'en')}><Globe2 size={15} /> {t.language}</button></nav></header>
       <div className="hero-content"><p className="overline hero-enter one">{t.heroKicker}</p><h1 className="hero-enter two">{t.heroTitle}</h1><p className="hero-text hero-enter three">{t.heroText}</p><a className="hero-cta hero-enter four" href="#collections">{t.heroCta} <ArrowDown size={17} /></a></div><div className="hero-bottom"><span>BN CERAMICS · KOGI STATE · NIGERIA</span><a href="#collections">{t.heroIndex} <ArrowDown size={14} /></a></div>
     </section>
 
