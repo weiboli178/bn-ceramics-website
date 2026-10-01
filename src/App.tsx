@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { type CSSProperties, type PointerEvent, useRef, useState } from 'react'
 import { ArrowDown, ArrowUpRight, Download, Globe2, MapPin, Menu, X } from 'lucide-react'
 import './App.css'
 
@@ -37,10 +37,10 @@ const copy = {
   },
 }
 
-function BrandMark() {
+function BrandMark({ className = '' }: { className?: string }) {
   const bTiles = [[4, 4], [13, 4], [22, 4], [4, 13], [31, 13], [4, 22], [13, 22], [22, 22], [4, 31], [31, 31], [4, 40], [13, 40], [22, 40]]
   const nTiles = [[57, 4], [93, 4], [57, 13], [66, 13], [93, 13], [57, 22], [75, 22], [93, 22], [57, 31], [84, 31], [93, 31], [57, 40], [93, 40]]
-  return <svg className="brand-mark" viewBox="0 0 106 48" role="img" aria-label="BN Ceramics logo">{bTiles.map(([x, y]) => <rect key={`b-${x}-${y}`} x={x} y={y} width="7" height="7" rx=".8" fill="currentColor" />)}{nTiles.map(([x, y]) => <rect key={`n-${x}-${y}`} x={x} y={y} width="7" height="7" rx=".8" fill="currentColor" />)}</svg>
+  return <svg className={`brand-mark ${className}`} viewBox="0 0 106 48" role="img" aria-label="BN Ceramics logo">{[...bTiles, ...nTiles].map(([x, y], index) => <rect className="logo-tile" style={{ '--tile-index': index } as CSSProperties} key={`${x}-${y}`} x={x} y={y} width="7" height="7" rx=".8" fill="currentColor" />)}</svg>
 }
 
 function QrPlaceholder({ label, tag }: { label: string; tag: string }) {
@@ -50,13 +50,36 @@ function QrPlaceholder({ label, tag }: { label: string; tag: string }) {
 function App() {
   const [lang, setLang] = useState<Lang>('en')
   const [menuOpen, setMenuOpen] = useState(false)
+  const heroRef = useRef<HTMLElement>(null)
   const t = copy[lang]
   const productHref = (page: number) => `${catalogueUrl}#page=${page}`
   const closeMenu = () => setMenuOpen(false)
+  const moveHero = (event: PointerEvent<HTMLElement>) => {
+    const hero = heroRef.current
+    if (!hero) return
+    const bounds = hero.getBoundingClientRect()
+    const x = ((event.clientX - bounds.left) / bounds.width - .5) * 20
+    const y = ((event.clientY - bounds.top) / bounds.height - .5) * 14
+    hero.style.setProperty('--pointer-x', `${x}px`)
+    hero.style.setProperty('--pointer-y', `${y}px`)
+    hero.style.setProperty('--pointer-x-back', `${x * -.25}px`)
+    hero.style.setProperty('--pointer-y-back', `${y * -.25}px`)
+    hero.style.setProperty('--pointer-x-copy', `${x * -.12}px`)
+    hero.style.setProperty('--pointer-y-copy', `${y * -.12}px`)
+  }
+  const resetHero = () => {
+    heroRef.current?.style.setProperty('--pointer-x', '0px')
+    heroRef.current?.style.setProperty('--pointer-y', '0px')
+    heroRef.current?.style.setProperty('--pointer-x-back', '0px')
+    heroRef.current?.style.setProperty('--pointer-y-back', '0px')
+    heroRef.current?.style.setProperty('--pointer-x-copy', '0px')
+    heroRef.current?.style.setProperty('--pointer-y-copy', '0px')
+  }
 
   return <main>
-    <section id="top" className="hero" style={{ backgroundImage: `url("${assetUrl('images/bn-hero-lobby-v1.png')}")` }}>
+    <section ref={heroRef} id="top" className="hero hero-interactive" onPointerMove={moveHero} onPointerLeave={resetHero} style={{ backgroundImage: `url("${assetUrl('images/bn-hero-lobby-v1.png')}")` }}>
       <header className="nav-wrap"><a className="brand" href="#top" aria-label="BN Ceramics home"><BrandMark /><span>BN Ceramics<small>Nigeria Limited</small></span></a><button className="menu-toggle" type="button" onClick={() => setMenuOpen((open) => !open)} aria-label="Toggle navigation">{menuOpen ? <X size={22} /> : <Menu size={22} />}</button><nav className={menuOpen ? 'nav open' : 'nav'}><a href="#collections" onClick={closeMenu}>{t.navProducts}</a><a href="#catalogue" onClick={closeMenu}>{t.navCatalogue}</a><a href="#company" onClick={closeMenu}>{t.navCompany}</a><a href="#contact" onClick={closeMenu}>{t.navContact}</a><button type="button" onClick={() => setLang(lang === 'en' ? 'zh' : 'en')}><Globe2 size={15} /> {t.language}</button></nav></header>
+      <div className="hero-monogram" aria-hidden="true"><span>BN / CERAMIC SYSTEMS</span><BrandMark className="hero-monogram-mark" /><i /></div>
       <div className="hero-content"><p className="overline hero-enter one">{t.heroKicker}</p><h1 className="hero-enter two">{t.heroTitle}</h1><p className="hero-text hero-enter three">{t.heroText}</p><a className="hero-cta hero-enter four" href="#collections">{t.heroCta} <ArrowDown size={17} /></a></div><div className="hero-bottom"><span>BN CERAMICS · KOGI STATE · NIGERIA</span><a href="#collections">{t.heroIndex} <ArrowDown size={14} /></a></div>
     </section>
 
