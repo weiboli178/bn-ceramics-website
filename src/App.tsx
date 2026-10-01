@@ -1,5 +1,5 @@
-import { type CSSProperties, type PointerEvent, useRef, useState } from 'react'
-import { ArrowDown, ArrowUpRight, Download, Globe2, MapPin, Menu, X } from 'lucide-react'
+import { type CSSProperties, type PointerEvent, useEffect, useRef, useState } from 'react'
+import { ArrowDown, ArrowUpRight, ChevronLeft, ChevronRight, Download, Globe2, MapPin, Menu, X } from 'lucide-react'
 import './App.css'
 
 type Lang = 'en' | 'zh'
@@ -50,10 +50,21 @@ function QrPlaceholder({ label, tag }: { label: string; tag: string }) {
 function App() {
   const [lang, setLang] = useState<Lang>('en')
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeMaterial, setActiveMaterial] = useState(0)
   const heroRef = useRef<HTMLElement>(null)
   const t = copy[lang]
+  const materialSlides = [
+    { image: assetUrl('images/bn-material-space-v1.png'), alt: 'Contemporary interior finished with large format ceramic surfaces', label: '01 / MATERIAL, LIGHT, SCALE', zhLabel: '01 / 材质、光线、尺度' },
+    { image: assetUrl('images/bn-material-living-v2.png'), alt: 'Sunlit contemporary living room with polished ceramic floor tiles', label: '02 / LIVING WITH MATERIAL', zhLabel: '02 / 材质融入生活' },
+    { image: assetUrl('images/bn-material-bath-v2.png'), alt: 'Boutique bathroom with dark porcelain wall and floor tiles', label: '03 / WALLS, WATER, TEXTURE', zhLabel: '03 / 墙面、水汽、肌理' },
+  ]
   const productHref = (page: number) => `${catalogueUrl}#page=${page}`
   const closeMenu = () => setMenuOpen(false)
+  const selectMaterial = (index: number) => setActiveMaterial((index + materialSlides.length) % materialSlides.length)
+  useEffect(() => {
+    const timer = window.setInterval(() => setActiveMaterial((index) => (index + 1) % materialSlides.length), 5600)
+    return () => window.clearInterval(timer)
+  }, [materialSlides.length])
   const moveHero = (event: PointerEvent<HTMLElement>) => {
     const hero = heroRef.current
     if (!hero) return
@@ -84,7 +95,7 @@ function App() {
       <div className="hero-content"><p className="overline hero-enter one">{t.heroKicker}</p><h1 className="hero-enter two">{t.heroTitle}</h1><p className="hero-text hero-enter three">{t.heroText}</p><a className="hero-cta hero-enter four" href="#collections">{t.heroCta} <ArrowDown size={17} /></a></div><div className="hero-bottom"><span>BN CERAMICS · KOGI STATE · NIGERIA</span><a href="#collections">{t.heroIndex} <ArrowDown size={14} /></a></div>
     </section>
 
-    <section className="material-story section-pad reveal"><div className="material-image"><img src={assetUrl('images/bn-material-space-v1.png')} alt="Contemporary interior finished with large format ceramic surfaces" /></div><div className="material-copy"><p className="section-label">{t.materialLabel}</p><h2>{t.materialTitle}</h2><p>{t.materialText}</p><span className="material-note">01 / MATERIAL, LIGHT, SCALE</span></div></section>
+    <section className="material-story section-pad reveal"><div className="material-carousel" aria-label="BN Ceramics material spaces">{materialSlides.map((slide, index) => <img className={index === activeMaterial ? 'active' : ''} key={slide.image} src={slide.image} alt={slide.alt} />)}<div className="material-carousel-meta"><span>{String(activeMaterial + 1).padStart(2, '0')} / 03</span><span>{lang === 'en' ? materialSlides[activeMaterial].label.split(' / ')[1] : materialSlides[activeMaterial].zhLabel.split(' / ')[1]}</span></div><div className="material-carousel-nav"><button type="button" onClick={() => selectMaterial(activeMaterial - 1)} aria-label="Previous material image"><ChevronLeft size={18} /></button><div>{materialSlides.map((slide, index) => <button type="button" className={index === activeMaterial ? 'active' : ''} key={slide.image} onClick={() => selectMaterial(index)} aria-label={`Show material image ${index + 1}`} />)}</div><button type="button" onClick={() => selectMaterial(activeMaterial + 1)} aria-label="Next material image"><ChevronRight size={18} /></button></div></div><div className="material-copy"><p className="section-label">{t.materialLabel}</p><h2>{t.materialTitle}</h2><p>{t.materialText}</p><span className="material-note">{lang === 'en' ? materialSlides[activeMaterial].label : materialSlides[activeMaterial].zhLabel}</span></div></section>
 
     <section id="collections" className="collections section-pad"><div className="collections-heading reveal"><p className="section-label">{t.collectionLabel}</p><div><h2>{t.collectionTitle}</h2><p>{t.collectionText}</p></div></div><div className="product-showcase reveal">
       <a className="featured-tile" href={productHref(tiles[0].page)} target="_blank" rel="noreferrer"><img src={tiles[0].image} alt={`${tiles[0].type} ${tiles[0].code}`} /><div><span>{t.selectedTile} · 01</span><h3>{tiles[0].code}</h3><p>{lang === 'en' ? tiles[0].type : tiles[0].zhType} · {tiles[0].size}</p><b>{t.viewInBook} <ArrowUpRight size={16} /></b></div></a>
