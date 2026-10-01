@@ -79,7 +79,7 @@ function App() {
   return <main>
     <section ref={heroRef} id="top" className="hero hero-interactive" onPointerMove={moveHero} onPointerLeave={resetHero} style={{ backgroundImage: `url("${assetUrl('images/bn-hero-lobby-v1.png')}")` }}>
       <header className="nav-wrap"><a className="brand" href="#top" aria-label="BN Ceramics home"><BrandMark /><span>BN Ceramics<small>Nigeria Limited</small></span></a><button className="menu-toggle" type="button" onClick={() => setMenuOpen((open) => !open)} aria-label="Toggle navigation">{menuOpen ? <X size={22} /> : <Menu size={22} />}</button><nav className={menuOpen ? 'nav open' : 'nav'}><a href="#collections" onClick={closeMenu}>{t.navProducts}</a><a href="#catalogue" onClick={closeMenu}>{t.navCatalogue}</a><a href="#company" onClick={closeMenu}>{t.navCompany}</a><a href="#contact" onClick={closeMenu}>{t.navContact}</a><button type="button" onClick={() => setLang(lang === 'en' ? 'zh' : 'en')}><Globe2 size={15} /> {t.language}</button></nav></header>
-      <div className="hero-monogram" aria-hidden="true"><span>BN / CERAMIC SYSTEMS</span><BrandMark className="hero-monogram-mark" /><i /></div>
+      <div className="hero-monogram" aria-hidden="true"><span>BN / CERAMICS</span><BrandMark className="hero-monogram-mark" /><i /></div>
       <div className="hero-content"><p className="overline hero-enter one">{t.heroKicker}</p><h1 className="hero-enter two">{t.heroTitle}</h1><p className="hero-text hero-enter three">{t.heroText}</p><a className="hero-cta hero-enter four" href="#collections">{t.heroCta} <ArrowDown size={17} /></a></div><div className="hero-bottom"><span>BN CERAMICS · KOGI STATE · NIGERIA</span><a href="#collections">{t.heroIndex} <ArrowDown size={14} /></a></div>
     </section>
 
