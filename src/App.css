@@ -56,3 +56,9 @@
 .contact .social-qr { gap: 16px; padding: 15px 0; }
 @media (max-width: 900px) { .contact-top { padding-top: 96px; }.contact .social-list { padding-left: 30px; } }
 @media (max-width: 760px) { .contact-top { padding-top: 82px; }.contact-top h2 { max-width: 480px; font-size: clamp(3rem, 12vw, 4.35rem); }.contact .social-list { border-left: 0; padding-left: 0; } }
+
+.direct-contact { width: 100%; margin-top: 30px; border-top: 1px solid #cbc9c1; }
+.direct-contact > p { margin: 15px 0 7px; color: #77756f; font-size: 9px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.direct-contact > div { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid #dddad2; padding: 10px 0; }
+.direct-contact span { color: #1b1a18; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.direct-contact strong { color: #bd3e22; font-size: 8px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
