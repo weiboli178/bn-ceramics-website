@@ -9,7 +9,7 @@ const assetUrl = (path: string) => `${import.meta.env.BASE_URL}${path}`
 const catalogueUrl = assetUrl('catalogue/bn-daily-stock-29-sep-2026.pdf')
 const address = 'Before Niger Bridge, 168 Ajaokuta - Ayangba Road Express Way, Itobe 263106, Kogi'
 const mapsUrl = 'https://www.google.com/maps/place/BN+Ceramics/@7.4472976,6.6799043,17z/data=!3m1!4b1!4m6!3m5!1s0x1045eb35e40345b1:0x4cbd71d71d18944c!8m2!3d7.4472976!4d6.6799043!16s%2Fg%2F11fkdd98gq?entry=ttu'
-const mapsEmbedUrl = 'https://maps.google.com/maps?q=7.4472976,6.6799043&z=17&output=embed'
+const mapsEmbedUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.162223431094!2d6.6799043!3d7.4472976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1045eb35e40345b1%3A0x4cbd71d71d18944c!2sBN%20Ceramics!5e0!3m2!1szh-CN!2sng!4v1791038479401!5m2!1szh-CN!2sng'
 const catalogueCards: Tile[] = [
   { code: '66107', type: 'Super Polished', zhType: '超亮抛光砖', size: '600 × 600 mm', image: assetUrl('products/super-polished-66107.jpg'), page: 23 },
   { code: '612105', type: 'Large Format', zhType: '大规格砖', size: '600 × 1200 mm', image: assetUrl('products/slab-612105.jpg'), page: 25 },
