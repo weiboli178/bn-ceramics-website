@@ -60,5 +60,6 @@
 .direct-contact { width: 100%; margin-top: 30px; border-top: 1px solid #cbc9c1; }
 .direct-contact > p { margin: 15px 0 7px; color: #77756f; font-size: 9px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
 .direct-contact > div { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid #dddad2; padding: 10px 0; }
-.direct-contact span { color: #1b1a18; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.direct-contact span { display: grid; gap: 4px; color: #1b1a18; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.direct-contact span small { color: #77756f; font-size: 9px; font-weight: 700; letter-spacing: .04em; line-height: 1.25; text-transform: none; }
 .direct-contact strong { color: #bd3e22; font-size: 8px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
