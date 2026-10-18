@@ -1,4 +1,4 @@
-import { type CSSProperties, type PointerEvent, useEffect, useRef, useState } from 'react'
+import { type PointerEvent, useEffect, useRef, useState } from 'react'
 import { ArrowDown, ArrowUpRight, ChevronLeft, ChevronRight, Globe2, MapPin, Menu, X } from 'lucide-react'
 import './App.css'
 
@@ -42,9 +42,7 @@ const copy = {
 }
 
 function BrandMark({ className = '' }: { className?: string }) {
-  const bTiles = [[4, 4], [13, 4], [22, 4], [4, 13], [31, 13], [4, 22], [13, 22], [22, 22], [4, 31], [31, 31], [4, 40], [13, 40], [22, 40]]
-  const nTiles = [[57, 4], [93, 4], [57, 13], [66, 13], [93, 13], [57, 22], [75, 22], [93, 22], [57, 31], [84, 31], [93, 31], [57, 40], [93, 40]]
-  return <svg className={`brand-mark ${className}`} viewBox="0 0 106 48" role="img" aria-label="BN Ceramics logo">{[...bTiles, ...nTiles].map(([x, y], index) => <rect className="logo-tile" style={{ '--tile-index': index } as CSSProperties} key={`${x}-${y}`} x={x} y={y} width="7" height="7" rx=".8" fill="currentColor" />)}</svg>
+  return <svg className={`brand-mark ${className}`} viewBox="0 0 128 52" role="img" aria-label="BN Ceramics logo"><rect width="128" height="52" fill="#ff0000" /><text x="10" y="42" fill="#080806" fontFamily="Arial Black, Arial, sans-serif" fontSize="46" fontWeight="900" letterSpacing="-2" textLength="108" lengthAdjust="spacingAndGlyphs">BN</text></svg>
 }
 
 function FacebookMark() {
@@ -94,8 +92,6 @@ function App() {
   return <main>
     <section ref={heroRef} id="top" className="hero hero-interactive" onPointerMove={moveHero} onPointerLeave={resetHero} style={{ backgroundImage: `url("${assetUrl('images/bn-hero-lobby-v1.png')}")` }}>
       <header className="nav-wrap"><a className="brand" href="#top" aria-label="BN Ceramics home"><BrandMark /><span>BN Ceramics<small>Nigeria Limited</small></span></a><button className="menu-toggle" type="button" onClick={() => setMenuOpen((open) => !open)} aria-label="Toggle navigation">{menuOpen ? <X size={22} /> : <Menu size={22} />}</button><nav className={menuOpen ? 'nav open' : 'nav'}><a href="#collections" onClick={closeMenu}>{t.navProducts}</a><a href="#catalogue" onClick={closeMenu}>{t.navCatalogue}</a><a href="#company" onClick={closeMenu}>{t.navCompany}</a><a href="#contact" onClick={closeMenu}>{t.navContact}</a><button type="button" onClick={() => setLang(lang === 'en' ? 'zh' : 'en')}><Globe2 size={15} /> {t.language}</button></nav></header>
-      <div className="hero-monogram" aria-hidden="true"><BrandMark className="hero-monogram-mark" /></div>
-      <div className="hero-imprint" aria-hidden="true"><BrandMark className="hero-imprint-mark" /></div>
       <div className="hero-content"><p className="overline hero-enter one">{t.heroKicker}</p><h1 className="hero-enter two">{t.heroTitle}</h1><p className="hero-text hero-enter three">{t.heroText}</p><a className="hero-cta hero-enter four" href="#collections">{t.heroCta} <ArrowDown size={17} /></a></div><div className="hero-bottom"><span>BN CERAMICS · KOGI STATE · NIGERIA</span><a href="#collections">{t.heroIndex} <ArrowDown size={14} /></a></div>
     </section>
 

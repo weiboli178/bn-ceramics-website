@@ -74,3 +74,15 @@
 .social-channel-link span { color: #77756f; font-size: 9px; font-weight: 700; letter-spacing: .035em; text-transform: none; }
 .social-channel-link > svg:last-child { justify-self: end; color: #1b1a18; }
 @media (max-width: 430px) { .direct-contact-row { align-items: flex-start; flex-direction: column; gap: 7px; }.direct-contact-row strong { font-size: 10px; }.email-contact strong { font-size: 12px; } }
+
+/* Official BN identity: red field, black letterforms. Keep it as a sharp signal rather than a page-wide colour. */
+.brand-mark { display: block; width: 72px; height: auto; flex: 0 0 auto; color: initial; box-shadow: 0 5px 15px rgba(0,0,0,.14); transition: transform .24s ease, box-shadow .24s ease; }
+.brand:hover .brand-mark { transform: translateY(-2px); box-shadow: 0 9px 20px rgba(0,0,0,.22); }
+footer .brand-mark { width: 66px; height: auto; }
+.catalogue-card-accent { width: 44px; border-top-color: #ff0000; }
+.catalogue-card-accent::after { display: none; }
+.catalogue-card-copy b { background: #ff0000; color: #080806; }
+.catalogue-card:hover .catalogue-card-copy b { background: #ff3b30; }
+.social-qr span, .direct-contact-row:hover strong { color: #e30613; }
+.direct-contact-row:focus-visible, .social-channel-link:focus-visible { outline-color: #e30613; }
+.placeholder-chip { border-color: #ff0000; color: #c60000; }
