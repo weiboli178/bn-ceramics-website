@@ -83,6 +83,7 @@ footer .brand-mark { width: 66px; height: auto; }
 .catalogue-card-accent::after { display: none; }
 .catalogue-card-copy b { border: 1px solid #e30613; background: transparent; color: #fff; }
 .catalogue-card:hover .catalogue-card-copy b { background: #e30613; color: #fff; }
-.social-qr span, .direct-contact-row:hover strong { color: #e30613; }
+.social-qr span { color: #77756f; }
+.direct-contact-row:hover strong { color: #e30613; }
 .direct-contact-row:focus-visible, .social-channel-link:focus-visible { outline-color: #e30613; }
 .placeholder-chip { border-color: #ff0000; color: #c60000; }
